@@ -1,19 +1,12 @@
-import mongoose from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const BlogSchema = new Schema({
-  title: String, // String is shorthand for {type: String}
+  title: String,
   author: String,
   body: String,
-  comments: [{ body: String, date: Date }],
-  date: { type: Date, default: Date.now },
   hidden: Boolean,
-  meta: {
-    votes: Number,
-    favs: Number,
-  },
+  date: { type: Date, default: Date.now },
 });
 
-// genre: [{ type: Schema.Types.ObjectId, ref: 'Genre' }],
-
-module.exports = mongoose.model('blog', BlogSchema);
+module.exports = mongoose.model('blogs', BlogSchema);
