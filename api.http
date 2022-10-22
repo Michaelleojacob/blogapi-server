@@ -1,8 +1,8 @@
-GET http://localhost:3000/
+GET http://localhost:3009/
 
 ###
 
-POST http://localhost:3000/
+POST http://localhost:3009/
 Content-Type: application/json
 
 {
@@ -10,4 +10,4 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/63532a4d919aadef64a7666b
+GET http://localhost:3009/blogs/63532a4d919aadef64a7666b
