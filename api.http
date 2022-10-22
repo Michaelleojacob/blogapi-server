@@ -8,3 +8,6 @@ Content-Type: application/json
 {
   "data": "hello world"
 }
+
+###
+GET http://localhost:3000/63532a4d919aadef64a7666b
