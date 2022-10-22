@@ -14,92 +14,49 @@ mongoose
   });
 
 class Comment {
-  constructor(blogId, title, body, date) {
+  constructor({ blogId, title, body, date }) {
     this.blogId = blogId;
     this.title = title;
     this.body = body;
-    this.date = date;
+    this.date = date || new Date();
   }
 }
 
-const commentBasedOnBlog = async ({ blog, title, body, date = new Date() }) => {
-  const getBlogId = await BlogSchema.findOne({ title: blog });
-  const comment = new Comment(getBlogId._id, title, body, date);
-  await CommentSchema.create(comment);
-};
+const randomArrayItem = (arr) => arr[Math.floor(Math.random() * arr.length)];
+
+const titles = [
+  'hello',
+  'goodbye',
+  'test',
+  'chicken',
+  'cool',
+  'lorim',
+  'ipsum',
+];
+const bodies = [
+  'this is a body',
+  'this is not a body',
+  'i like pineapple pizza',
+  'cats > dogs',
+  'dogs > cats',
+  'the odin project',
+];
 
 const seedDB = async () => {
   await CommentSchema.deleteMany({});
-  await commentBasedOnBlog({
-    blog: 'one',
-    title: 'first!',
-    body: 'nice blog',
-  });
-  await commentBasedOnBlog({
-    blog: 'one',
-    title: 'this is awesome!',
-    body: 'learned a lot!',
-  });
-  await commentBasedOnBlog({
-    blog: 'two',
-    title: 'in',
-    body: 'credible',
-  });
-  await commentBasedOnBlog({
-    blog: 'two',
-    title: 'lol',
-    body: 'rawr',
-  });
-  await commentBasedOnBlog({
-    blog: 'two',
-    title: 'xd',
-    body: 'test',
-  });
-  await commentBasedOnBlog({
-    blog: 'three',
-    title: 'lorem',
-    body: 'ipsum',
-  });
-  await commentBasedOnBlog({
-    blog: 'four',
-    title: 'what',
-    body: 'in the world',
-  });
-  await commentBasedOnBlog({
-    blog: 'five',
-    title: '?',
-    body: 'looking for dinner recommendations',
-  });
-  await commentBasedOnBlog({
-    blog: 'five',
-    title: 'thai',
-    body: 'red curry!',
-  });
-  await commentBasedOnBlog({
-    blog: 'five',
-    title: 'mexican',
-    body: 'carne asada fries',
-  });
-  await commentBasedOnBlog({
-    blog: 'five',
-    title: 'mexican',
-    body: 'carne asada fries',
-  });
-  await commentBasedOnBlog({
-    blog: 'six',
-    title: 'favorite animals?',
-    body: 'ill go first, dogs.',
-  });
-  await commentBasedOnBlog({
-    blog: 'six',
-    title: 'animals',
-    body: 'cats',
-  });
-  await commentBasedOnBlog({
-    blog: 'six',
-    title: 'animals',
-    body: 'burritos',
-  });
+  const getBlogs = await BlogSchema.find();
+  const ids = getBlogs.map((item) => item._id.toString());
+  const comments = [];
+  for (let i = 0; i < 10; i++) {
+    comments.push(
+      new Comment({
+        blogId: randomArrayItem(ids),
+        title: randomArrayItem(titles),
+        body: randomArrayItem(bodies),
+      })
+    );
+  }
+  await CommentSchema.insertMany(comments);
 };
 
 seedDB().then(() => {
