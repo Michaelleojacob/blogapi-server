@@ -20,7 +20,6 @@ app.get('/', async (req, res, next) => {
 app.get('/:blogid', async (req, res, next) => {
   const id = req.params.blogid;
   const getComments = await CommentSchema.find({ blogId: id });
-  console.log(getComments);
   return res.json(getComments);
 });
 
