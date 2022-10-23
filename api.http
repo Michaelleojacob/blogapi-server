@@ -10,4 +10,9 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3009/blogs/63532a4d919aadef64a7666b
+// two comments
+GET http://localhost:3009/blog/63532a4d919aadef64a7666b
+
+###
+// one comment
+GET http://localhost:3009/blog/63532a4d919aadef64a76669

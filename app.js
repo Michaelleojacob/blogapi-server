@@ -26,6 +26,7 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+// get all blogs
 app.get('/', async (req, res, next) => {
   console.log(`${req.protocol}://${req.headers.host}`);
   console.log(`${req.protocol}://${req.hostname}${req.originalUrl}`);
@@ -33,13 +34,15 @@ app.get('/', async (req, res, next) => {
   return res.json(blogs);
 });
 
-app.get('/:id', async (req, res, next) => {
-  console.log(req.params.id);
+// get single blog and comments
+app.get('/blog/:id', async (req, res, next) => {
   const blog = await BlogSchema.find({ _id: req.params.id });
   const comments = await CommentSchema.find({ blogId: req.params.id });
-  return res.json([...blog, ...comments]);
+  console.log(comments);
+  return res.json([...blog, comments]);
 });
 
+// get just the comments
 app.get('/blogs/:blogId', async (req, res, next) => {
   const { blogId } = req.params;
   const getComments = await CommentSchema.find({ blogId });
