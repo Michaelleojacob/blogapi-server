@@ -70,7 +70,7 @@ app.post('/blog/:id/newComment', async (req, res, next) => {
   }
 });
 
-const PORT = 3009;
-app.listen(PORT, (req, res) => {
-  console.log(`app is listening on port ${PORT}`);
+const port = process.env.PORT || 3001;
+app.listen(port, (req, res) => {
+  console.log(`app is listening on port ${port}`);
 });
