@@ -33,6 +33,13 @@ app.get('/', async (req, res, next) => {
   return res.json(blogs);
 });
 
+app.get('/:id', async (req, res, next) => {
+  console.log(req.params.id);
+  const blog = await BlogSchema.find({ _id: req.params.id });
+  const comments = await CommentSchema.find({ blogId: req.params.id });
+  return res.json([...blog, ...comments]);
+});
+
 app.get('/blogs/:blogId', async (req, res, next) => {
   const { blogId } = req.params;
   const getComments = await CommentSchema.find({ blogId });
