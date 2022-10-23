@@ -38,7 +38,6 @@ app.get('/', async (req, res, next) => {
 app.get('/blog/:id', async (req, res, next) => {
   const blog = await BlogSchema.find({ _id: req.params.id });
   const comments = await CommentSchema.find({ blogId: req.params.id });
-  console.log(comments);
   return res.json([...blog, comments]);
 });
 
