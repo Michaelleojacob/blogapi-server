@@ -48,6 +48,28 @@ app.get('/blogs/:blogId', async (req, res, next) => {
   return res.json(getComments);
 });
 
+class Comment {
+  constructor({ blogId, title, body, date }) {
+    this.blogId = blogId;
+    this.title = title;
+    this.body = body;
+    this.date = date || new Date();
+  }
+}
+
+// new comment
+app.post('/blog/:id/newComment', async (req, res, next) => {
+  try {
+    const { title, body, id } = req.body;
+    const comment = new Comment({ blogId: id.id, title, body });
+    await CommentSchema.create(comment);
+    const getComments = await CommentSchema.find({ blogId: id.id });
+    return res.json(getComments);
+  } catch (err) {
+    return console.log(err);
+  }
+});
+
 const PORT = 3009;
 app.listen(PORT, (req, res) => {
   console.log(`app is listening on port ${PORT}`);
