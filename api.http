@@ -1,8 +1,8 @@
-GET http://localhost:3009/
+GET https://blog-api-server.onrender.com/
 
 ###
 
-POST http://localhost:3009/
+POST https://blog-api-server.onrender.com/
 Content-Type: application/json
 
 {
@@ -11,8 +11,8 @@ Content-Type: application/json
 
 ###
 // two comments
-GET http://localhost:3009/blog/63532a4d919aadef64a7666b
+GET https://blog-api-server.onrender.com/blog/63532a4d919aadef64a7666b
 
 ###
 // one comment
-GET http://localhost:3009/blog/63532a4d919aadef64a76669
+GET https://blog-api-server.onrender.com/blog/63532a4d919aadef64a76669

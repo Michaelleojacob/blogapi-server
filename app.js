@@ -11,7 +11,10 @@ mongoose.connect(process.env.DB_URI).catch((error) => console.log(error));
 const app = express();
 
 // cors boilerplate / allow list
-const allowlist = ['http://localhost:3000', 'http://example2.com'];
+const allowlist = [
+  'http://localhost:3000',
+  'https://blogapi-client-danofq240-michaelleojacob.vercel.app',
+];
 const corsOptionsDelegate = function (req, callback) {
   let corsOptions;
   if (allowlist.indexOf(req.header('Origin')) !== -1) {
